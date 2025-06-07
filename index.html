@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Logika Shop</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <div class="logo">Logika Shop</div>
+    <nav>
+        <a href="#home">Головна</a>
+        <a href="#products-section">Товари</a>
+        <a href="#about-us">Про нас</a>
+    </nav>
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Пошук товарів...">
+        <button onclick="searchProducts()">Пошук</button>
+    </div>
+    <div class="cart-btn" onclick="toggleCart()">
+        🛒 Кошик (<span id="cart-count">0</span>)
+    </div>
+</header>
+
+<main>
+    <section id="home" class="content-section home-section">
+        <div class="hero-banner">
+            <h1>Ласкаво просимо до Logika Shop!</h1>
+            <p>Ваш ідеальний вибір для сучасної електроніки.</p>
+            <a href="#products-section" class="shop-now-btn">Переглянути товари</a>
+        </div>
+    </section>
+
+    <section id="products-section" class="content-section">
+        <h2>Наші Товари</h2>
+        <div class="products" id="product-list">
+            <div class="product" data-name="Смарт Годинник">
+                <img src="/img/f4d07818-a548-49ad-905d-90c3a47f9d01.png" alt="Смарт Годинник">
+                <h3>Смарт Годинник</h3>
+                <p>Ціна: 1200 грн</p>
+                <button onclick="addToCart('Смарт Годинник', 1200)">Додати до кошика</button>
+            </div>
+            <div class="product" data-name="Навушники Bluetooth">
+                <img src="/img/a2d80308-dc19-4a91-866c-59110c7d7d0e.png" alt="Навушники Bluetooth">
+                <h3>Навушники Bluetooth</h3>
+                <p>Ціна: 850 грн</p>
+                <button onclick="addToCart('Навушники Bluetooth', 850)">Додати до кошика</button>
+            </div>
+            <div class="product" data-name="Павербанк 10000 мАг">
+                <img src="/img/8b4b945a-84d5-41a1-abda-38c7f860d8f3.png" alt="Павербанк 10000 мАг">
+                <h3>Павербанк 10000 мАг</h3>
+                <p>Ціна: 600 грн</p>
+                <button onclick="addToCart('Павербанк 10000 мАг', 600)">Додати до кошика</button>
+            </div>
+            <div class="product" data-name="Бездротова Зарядка">
+                <img src="/img/ChatGPT Image 7 июн. 2025 г., 11_04_12.png" alt="Бездротова Зарядка">
+                <h3>Бездротова Зарядка</h3>
+                <p>Ціна: 450 грн</p>
+                <button onclick="addToCart('Бездротова Зарядка', 450)">Додати до кошика</button>
+            </div>
+            <div class="product" data-name="Портативна Колонка">
+                <img src="/img/ChatGPT Image 7 июн. 2025 г., 11_07_39.png" alt="Портативна Колонка">
+                <h3>Портативна Колонка</h3>
+                <p>Ціна: 999 грн</p>
+                <button onclick="addToCart('Портативна Колонка', 999)">Додати до кошика</button>
+            </div>
+            <div class="product" data-name="Кабель USB-C">
+                <img src="/img/ChatGPT Image 7 июн. 2025 г., 11_09_12.png" alt="Кабель USB-C">
+                <h3>Кабель USB-C</h3>
+                <p>Ціна: 150 грн</p>
+                <button onclick="addToCart('Кабель USB-C', 150)">Додати до кошика</button>
+            </div>
+        </div>
+        <button class="checkout-btn" onclick="openCheckout()">Оформити замовлення</button>
+    </section>
+
+    <section id="about-us" class="content-section about-us-section">
+        <h2>Про нас</h2>
+        <div class="about-content">
+            <p>Logika Shop - це ваш надійний партнер у світі сучасної електроніки. Ми пропонуємо широкий асортимент високоякісних товарів, від смарт-годинників до потужних павербанків, щоб задовольнити всі ваші потреби.</p>
+            <p>Наша місія - надавати клієнтам лише найкращі продукти за конкурентними цінами, забезпечуючи при цьому відмінний сервіс та підтримку. Ми постійно оновлюємо наш каталог, щоб ви завжди мали доступ до останніх технологічних новинок.</p>
+            <p>Дякуємо, що обираєте Logika Shop!</p>
+        </div>
+    </section>
+</main>
+
+<footer>
+    © 2025 Logika Shop. Усі права захищені.
+</footer>
+
+<div class="modal" id="cartModal">
+    <div class="modal-content">
+        <h3>Ваш Кошик</h3>
+        <ul id="cart-items-list">
+            </ul>
+        <p>Загальна сума: <span id="cart-total">0</span> грн</p>
+        <button onclick="closeCartModal()">Продовжити покупки</button>
+        <button class="checkout-btn-modal" onclick="openCheckoutFromCart()">Оформити замовлення</button>
+    </div>
+</div>
+
+<div class="modal" id="checkoutModal">
+    <div class="modal-content">
+        <h3>Оформлення замовлення</h3>
+        <input type="text" id="customerName" placeholder="Ім’я">
+        <input type="text" id="customerAddress" placeholder="Адреса доставки">
+        <input type="tel" id="customerPhone" placeholder="Телефон">
+        <button onclick="submitOrder()">Підтвердити</button>
+        <button onclick="closeCheckoutModal()">Скасувати</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
